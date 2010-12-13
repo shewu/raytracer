@@ -117,25 +117,27 @@ void Raytracer::translate(SceneDagNode* node, Vector3D trans)
 
 void Raytracer::scale(SceneDagNode* node, Point3D origin, float factor[3])
 {
-   Matrix4x4 scale;
+	Matrix4x4 scale;
 
-   initMatrix(scale);
-   scale[0][0] = factor[0];
-   scale[0][3] = origin.v[0] - factor[0] * origin.v[0];
-   scale[1][1] = factor[1];
-   scale[1][3] = origin.v[1] - factor[1] * origin.v[1];
-   scale[2][2] = factor[2];
-   scale[2][3] = origin.v[2] - factor[2] * origin.v[2];
-   mulMatrix(node->trans, node->trans, scale);
-   scale[0][0] = 1 / factor[0];
-   scale[0][3] = origin.v[0] - 1 / factor[0] * origin.v[0];
-   scale[1][1] = 1 / factor[1];
-   scale[1][3] = origin.v[1] - 1 / factor[1] * origin.v[1];
-   scale[2][2] = 1 / factor[2];
-   scale[2][3] = origin.v[2] - 1 / factor[2] * origin.v[2];
-   mulMatrix(node->invtrans, scale, node->invtrans);
-   if (node->obj)
-      node->obj->ident = false;
+	initMatrix(scale);
+	scale[0][0] = factor[0];
+	scale[0][3] = origin.v[0] - factor[0] * origin.v[0];
+	scale[1][1] = factor[1];
+	scale[1][3] = origin.v[1] - factor[1] * origin.v[1];
+	scale[2][2] = factor[2];
+	scale[2][3] = origin.v[2] - factor[2] * origin.v[2];
+	mulMatrix(node->trans, node->trans, scale);
+	scale[0][0] = 1 / factor[0];
+	scale[0][3] = origin.v[0] - 1 / factor[0] * origin.v[0];
+	scale[1][1] = 1 / factor[1];
+	scale[1][3] = origin.v[1] - 1 / factor[1] * origin.v[1];
+	scale[2][2] = 1 / factor[2];
+	scale[2][3] = origin.v[2] - 1 / factor[2] * origin.v[2];
+	mulMatrix(node->invtrans, scale, node->invtrans);
+	if (node->obj)
+	{
+		node->obj->ident = false;
+	}
 }
 
 void Raytracer::initInvViewMatrix(Matrix4x4 mat, Point3D eye, Vector3D view,

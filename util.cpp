@@ -85,10 +85,7 @@ Vector3D Vector3D::operator+(const Vector3D& v) const
 {
 	// addps
 	Vector3D ret;
-	__m128 thisv = _mm_load_ps(this->v);
-	__m128 vv = _mm_load_ps(v.v);
-	__m128 retv = _mm_add_ps(thisv, vv);
-	_mm_store_ps(ret.v, retv);
+	_mm_store_ps(ret.v, _mm_add_ps(_mm_load_ps(this->v), _mm_load_ps(v.v)));
 	return ret;
 }
 
@@ -96,10 +93,7 @@ Vector3D Vector3D::operator-(const Vector3D& v) const
 {
 	// subps
 	Vector3D ret;
-	__m128 thisv = _mm_load_ps(this->v);
-	__m128 vv = _mm_load_ps(v.v);
-	__m128 retv = _mm_sub_ps(thisv, vv);
-	_mm_store_ps(ret.v, retv);
+	_mm_store_ps(ret.v, _mm_sub_ps(_mm_load_ps(this->v), _mm_load_ps(v.v)));
 	return ret;
 }
 
@@ -198,18 +192,14 @@ Vector3D operator*(float s, const Vector3D& v)
 {
    Vector3D ret;
    float sarr[4] = {s,s,s,0};
-   __m128 ret_sse = _mm_mul_ps(_mm_load_ps(sarr), _mm_load_ps(v.v));
-   _mm_store_ps(ret.v, ret_sse);
+   _mm_store_ps(ret.v, _mm_mul_ps(_mm_load_ps(sarr), _mm_load_ps(v.v)));
    return ret;
 }
 
 Point3D Point3D::operator+(const Vector3D& v) const
 {
    Point3D ret;
-   __m128 thisv = _mm_load_ps(this->v);
-   __m128 vv = _mm_load_ps(v.v);
-   __m128 retv = _mm_add_ps(thisv, vv);
-   _mm_store_ps(ret.v, retv);
+   _mm_store_ps(ret.v, _mm_add_ps(_mm_load_ps(this->v), _mm_load_ps(v.v)));
    return ret;
 }
 
