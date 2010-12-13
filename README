@@ -1,0 +1,20 @@
+IMPORTANT:
+* commits should always be in the following format:
+  
+	STATUS; summary of changes
+
+  Examples:
+
+    WORKING; modified README
+	QUESTTIONABLE; image is slightly darker
+	NONWORKING; where did our global illumination go?!
+
+* leave curly braces on their separate line and include them even if the 
+  if-statement is one line long
+* Make with NOCILK=1 if your machine does not have cilk
+  * send email if you want the cilk programming guide
+
+TODO:
+* implement octree for irradiance cache
+* change spherical coords in Photon struct to cartesian coords
+
